@@ -1,0 +1,15 @@
+# Define Docker Compose version.
+version: "3"
+
+# Define all the containers.
+services:
+  # backend Container.
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/backend/
+      - /backend/node_modules
+    ports:
+     - 3020:4000
+    env_file:
+      - ./.env
