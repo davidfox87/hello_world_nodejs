@@ -3,7 +3,8 @@ npm install express
 npm install dotenv
 
 docker build -t nodejsserve .
-docker run -it -d --rm -p 3017:8080 nodejsserve:latest 
+
+docker run -it -d --rm -p 3020:8080 nodejsserve:latest 
 
 OR 
 
