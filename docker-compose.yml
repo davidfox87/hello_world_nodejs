@@ -5,6 +5,7 @@ version: "3"
 services:
   # backend Container.
   backend:
+    image: backend
     build: ./backend
     volumes:
       - ./backend:/backend/
@@ -13,9 +14,9 @@ services:
      - 3020:4000
     env_file:
       - ./.env
-  db:
-    image: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example
+  # db:
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: example
 

@@ -10,19 +10,17 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-const PORT = 4000;
-const HOST = '0.0.0.0';
-
 app.get('/service2', (req, res) => {
   res.send('Hello, from service2 root');
 });
 
 app.get('/service2/hello', (req, res) => {
-  res.send('Hello, from service2/hello');
+  res.send(`Hello, from service2/hello. The database name taken from the env file is ${process.env.DB_NAME}`);
 });
 
-const host = process.env.REACT_APP_SERVER_URL
+//const host = process.env.REACT_APP_SERVER_URL
 const port = process.env.NODE_ENV === 'production' ? process.env.SERVER_PORT : 4000;
 
-app.listen(PORT, HOST);
+const host = '0.0.0.0'
+app.listen(port, host);
 console.log(`Running on ${host}:${port}`);
