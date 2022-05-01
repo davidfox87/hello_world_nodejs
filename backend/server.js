@@ -1,26 +1,38 @@
-'use strict';
-require('rootpath')();
-//DotEnv is a lightweight npm package that automatically 
-//loads environment variables from a .env file into the process.env object.
-
-//Accessing your variables is super easy! They are attached to the process.env object,
-// so you can access them using the pattern process.env.KEY.  
 require('dotenv').config(); 
+const express = require("express");
+const cors = require("cors");
 
-const express = require('express');
 const app = express();
 
-app.get('/service2', (req, res) => {
-  res.send('Hello, from service2 root');
+var corsOptions = {
+  origin: "http://localhost:4000"
+};
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+
+const db = require("./models")
+db.sequelize.sync()
+
+// const hello = require('./routes/user.routes')
+// app.use('/service2', hello)
+
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to my test application." });
 });
 
-app.get('/service2/hello', (req, res) => {
-  res.send(`Hello, from service2/hello. The database name taken from the env file is ${process.env.DB_NAME}`);
+require("./routes/user.routes")(app);
+
+
+// set port, listen for requests
+const PORT = process.env.NODE_DOCKER_PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
-
-//const host = process.env.REACT_APP_SERVER_URL
-const port = process.env.NODE_ENV === 'production' ? process.env.SERVER_PORT : 4000;
-
-const host = '0.0.0.0'
-app.listen(port, host);
-console.log(`Running on ${host}:${port}`);
