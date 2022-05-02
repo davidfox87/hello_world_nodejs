@@ -24,10 +24,15 @@ From this tutorial, docker-compose is defined as :
 Let’s recall what a task-definition is: it is just a specification. You use it to define one or more containers that you want to run together, along with other details such as environment variables, CPU/memory requirements, etc.
 
 From the two definitions, we can see that a task definition role is similar to that of a docker-compose file.
-
+# React frontend, Node.js backend, MySQL database with docker-compose
+docker-compose up --build
 
 docker exec -it hello_world_nodejs_mysqldb_1 bash
 mysql -uroot -p testdb
 123456
 SHOW DATABASES;
 USE testdb;
+
+curl -X POST http://localhost:4002/api/users -H 'Content-Type: application/json' -d '{"firstName":"David", "lastName":"Fox"}'
+
+docker-compose down --volumes
