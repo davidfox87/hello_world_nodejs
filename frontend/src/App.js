@@ -5,6 +5,7 @@ import About from './routes/About';
 import Projects from './routes/Projects';
 import Nav from './routes/Nav';
 
+
 import {
   BrowserRouter,
   Routes,
@@ -22,6 +23,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
         </Routes>
     </BrowserRouter>
+
 
   )
 }

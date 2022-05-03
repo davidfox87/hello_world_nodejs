@@ -36,9 +36,21 @@ services:
     networks:
       - backend
 
+  frontend:
+    depends_on:
+      - backend
+    image: frontend
+    build: 
+      context: ./frontend
+      args:
+        - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL # pass arguments into the docker file
+    ports:
+      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    networks:
+      - frontend  
 volumes: 
   db:
 
 networks:
   backend:
-  #frontend:
+  frontend:
